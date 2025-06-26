@@ -1,0 +1,52 @@
+{
+  "name": "syncidetool",
+  "version": "1.0.0",
+  "description": "强大的IDE配置同步工具，支持多平台多存储后端",
+  "main": "dist/index.js",
+  "bin": {
+    "trea-sync": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/cli.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr6pets/syncIDETool.git"
+  },
+  "keywords": ["ide",
+    "sync",
+    "configuration",
+    "trea",
+    "vscode",
+    "development",
+    "tools"],
+  "author": "alvisliu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mr6pets/syncIDETool/issues"
+  },
+  "homepage": "https://github.com/Mr6pets/syncIDETool#readme",
+  "dependencies": {
+    "axios": "^1.10.0",
+    "commander": "^14.0.0",
+    "crypto-js": "^4.2.0",
+    "diff": "^8.0.2",
+    "dotenv": "^16.5.0",
+    "fs-extra": "^11.3.0",
+    "install": "^0.13.0",
+    "ora": "^8.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}
