@@ -1,7 +1,16 @@
 # SyncIDETool - IDE配置同步工具
 
 一个强大的npm包，用于在不同设备和环境之间同步IDE配置文件，支持多种存储后端。
+[![npm version](https://badge.fury.io/js/syncidetool.svg)](https://badge.fury.io/js/syncidetool)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
+[![Downloads](https://img.shields.io/npm/dm/syncidetool.svg)](https://www.npmjs.com/package/syncidetool)
 
+## 📚 目录
+- [特性](#-特性)
+- [安装](#-安装)
+- [使用指南](#️-使用指南)
+- [配置](#️-配置)
+- [高级功能](#-高级功能)
 ## 🚀 特性
 
 - 🔄 **多平台同步**: 支持Windows、macOS、Linux
@@ -13,48 +22,55 @@
 
 ## 📦 安装
 
-### 全局安装
+#### :clubs: 全局安装
 ```bash
 npm install -g syncidetool
 ```
 
-本地安装
-bash
+#### :pushpin: 本地安装
+
+``` bash
 运行
 npm install syncidetool
-🛠️ 使用指南
+```
+# 🛠️ 使用指南
 1. 初始化配置
 首次使用需要初始化配置：
 
-bash
+```bash
 运行
 npx trea-sync setup
+```
 系统会引导你选择：
 
 存储后端（GitHub、Gitee、本地）
 认证信息配置
 同步策略设置
+
 2. 同步配置
 常规同步（显示差异）
-bash
+```bash
 运行
 npx trea-sync sync
+```
 强制同步（覆盖远程）
-bash
+```bash
 运行
 npx trea-sync sync --force
+```
 3. 查看状态
-bash
+```bash
 运行
 npx trea-sync status
-⚙️ 配置
+```
+# ⚙️ 配置
 环境变量配置
 创建 .env 文件：
-
-env
-
-# GitHub配置GITHUB_TOKEN=your_github_personal_access_tokenGIST_ID=your_gist_id_optional# Gitee配置GITEE_TOKEN=your_gitee_access_tokenGITEE_GIST_ID=your_gitee_gist_id_optional# 加密密钥ENCRYPTION_KEY=your_encryption_key
-支持的IDE配置路径
+```
+ GitHub配置GITHUB_TOKEN=your_github_personal_access_tokenGIST_ID=your_gist_id_optional
+ # Gitee配置GITEE_TOKEN=your_gitee_access_tokenGITEE_GIST_ID=your_gitee_gist_id_optional
+ # 加密密钥ENCRYPTION_KEY=your_encryption_key
+ 支持的IDE配置路径
 Trea IDE:
 
 Windows: %USERPROFILE%\AppData\Roaming\Trea\config
@@ -65,55 +81,83 @@ VS Code:
 Windows: %APPDATA%\Code\User
 macOS: ~/Library/Application Support/Code/User
 Linux: ~/.config/Code/User
-🔧 高级功能
+```
+
+# 🔧 高级功能
 自定义同步规则
 在项目根目录创建 .treasync.config.js：
 
 javascript
-
-module.exports = {  // 包含的文件模式  include: ['*.json', '*.conf', 'settings/*'],    // 排除的文件模式  exclude: ['temp/*', '*.log'],    // 冲突解决策略  conflictResolution: 'merge', // 'local' |   'remote' | 'merge'    // 加密配置  encryption: {    enabled: true,    algorithm: 'AES'  },    // 备份设置  backup: {    enabled: true,    maxBackups: 5  }};
+```
+module.exports = {  
+  // 包含的文件模式  
+  include: ['*.json', '*.conf', 'settings/*'],    
+  // 排除的文件模式  
+  exclude: ['temp/*', '*.log'],   
+  // 冲突解决策略  
+  conflictResolution: 'merge', 
+  // 'local' |   'remote' | 'merge'    
+  // 加密配置  
+  encryption: {    enabled: true,    algorithm: 'AES'  },    
+  // 备份设置  
+  backup: {    enabled: true,    maxBackups: 5  }
+};
+```
 多环境配置
-bash
+```bash
 运行
-# 开发环境npx trea-sync sync --env dev# 生产环境npx trea-sync sync --env prod
+# 开发环境npx trea-sync sync --env dev
+# 生产环境npx trea-sync sync --env prod
+```
 📋 使用场景
 场景1: 家庭到公司同步
-bash
+```bash
 运行
-# 在家工作后trea-sync sync# 到公司后trea-sync sync
+# 在家工作后trea-sync sync
+# 到公司后trea-sync sync
+```
 场景2: 多设备同步
-bash
+```bash
 运行
-# 在笔记本电脑上trea-sync sync# 在台式机上trea-sync sync
+# 在笔记本电脑上trea-sync sync
+# 在台式机上trea-sync sync
+```
 场景3: 新环境初始化
-bash
+``` bash
 运行
-# 在新电脑上npm install -g syncidetooltrea-sync setuptrea-sync sync
+# 在新电脑上npm install -g syncidetool trea-sync setup trea-sync sync
+```
 场景4: 团队配置共享
-bash
+```bash
 运行
-# 团队负责人发布配置trea-sync sync --team --public# 团队成员同步配置trea-sync sync --team --from team-config-id
+# 团队负责人发布配置trea-sync sync --team --public
+# 团队成员同步配置trea-sync sync --team --from team-config-id
+```
 🔍 故障排除
 常见问题
 认证失败
 
-bash
+```bash
 运行
 # 重新配置认证信息trea-sync setup --reconfigure
+```
 配置冲突
 
-bash
+```bash
 运行
 # 查看详细差异trea-sync diff# 手动解决冲突trea-sync resolve
+```
 网络问题
 
-bash
+```bash
 运行
 # 使用本地备份trea-sync sync --offline
+```
 日志查看
-bash
+```bash
 运行
 # 查看同步日志trea-sync logs# 详细调试信息trea-sync sync --verbose
+````
 🛣️ 开发路线图
 支持更多IDE（VS Code、IntelliJ IDEA、Sublime Text）
 GUI界面

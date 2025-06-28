@@ -1,6 +1,6 @@
-import fs from 'fs-extra';
-import path from 'path';
-import os from 'os';
+import * as os from 'os';
+import * as path from 'path';
+import * as fs from 'fs-extra';
 import crypto from 'crypto-js';
 
 // 获取 Trea IDE 配置路径（根据实际路径调整）
@@ -50,4 +50,30 @@ export function encryptConfig(data: string, key: string): string {
 export function decryptConfig(data: string, key: string): string {
   const bytes = crypto.AES.decrypt(data, key);
   return bytes.toString(crypto.enc.Utf8);
+}
+
+const configPath = path.join(os.homedir(), '.trea-sync-config.json');
+
+export interface Config {
+  githubToken?: string;
+  gistId?: string;
+  localStoragePath?: string;
+  encryptionKey?: string;
+  debug?: boolean;
+  verbose?: boolean;
+}
+
+export async function saveConfig(config: Config): Promise<void> {
+  await fs.writeJSON(configPath, config, { spaces: 2 });
+}
+
+export async function loadConfig(): Promise<Config> {
+  if (await fs.pathExists(configPath)) {
+    return await fs.readJSON(configPath);
+  }
+  throw new Error('请先运行 "trea-sync init" 进行初始化');
+}
+
+export async function hasConfig(): Promise<boolean> {
+  return await fs.pathExists(configPath);
 }

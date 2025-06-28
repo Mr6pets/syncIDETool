@@ -45,10 +45,15 @@ export async function loadFromLocal(syncId?: string): Promise<any> {
     // 加载最新同步
     const latestPath = path.join(LOCAL_STORAGE_PATH, 'latest.txt');
     if (await fs.pathExists(latestPath)) {
-      actualSyncId = await fs.readFile(latestPath, 'utf-8');
+      actualSyncId = (await fs.readFile(latestPath, 'utf-8')).trim();
     } else {
       throw new Error('没有找到本地同步记录');
     }
+  }
+  
+  // 添加类型检查
+  if (!actualSyncId) {
+    throw new Error('无效的同步ID');
   }
   
   const syncPath = path.join(LOCAL_STORAGE_PATH, actualSyncId);
