@@ -100,3 +100,6 @@ export function detectEnvironment() {
     workingDir: process.cwd()
   };
 }
+
+
+// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测// 环境检测
