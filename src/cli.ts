@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { Command } from 'commander';
 import { syncConfig, setup, showStatus, interactiveSetup } from './core';
 
