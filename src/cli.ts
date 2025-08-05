@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Command } from 'commander';
-import { syncConfig, setup, showStatus, interactiveSetup, guidedSetup } from './core';
+import { syncConfig, setup, showStatus, guidedSetup } from './core'; // 移除不存在的 interactiveSetup
 import chalk from 'chalk';
 
 const program = new Command();
@@ -15,6 +15,16 @@ program
   .command('guide')
   .description('🚀 新手引导 - 一步步完成配置')
   .action(guidedSetup);
+
+// 添加缺少的 quickStart 函数
+async function quickStart() {
+  console.log(chalk.cyan('⚡ 快速开始配置...'));
+  try {
+    await guidedSetup();
+  } catch (error: any) {
+    console.error(chalk.red('快速配置失败:'), error.message);
+  }
+}
 
 // 快速开始命令
 program

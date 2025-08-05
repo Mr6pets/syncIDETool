@@ -143,12 +143,6 @@ export async function showStatus() {
   console.log('状态显示功能待实现');
 }
 
-import inquirer from 'inquirer';
-import chalk from 'chalk';
-import { openTokenPage } from './utils';
-import fs from 'fs-extra';
-import path from 'path';
-
 // 引导式配置
 export async function guidedSetup(): Promise<void> {
   console.clear();
@@ -258,7 +252,8 @@ async function configureAuthStep(storageType: string): Promise<any> {
   
   if (openBrowser) {
     console.log(chalk.blue(`🌐 正在打开 ${tokenUrl}`));
-    await openTokenPage(storageType);
+    // 修复这行代码，移除参数
+    await openTokenPage(); // 移除 storageType 参数
     console.log(chalk.yellow('\n📝 创建令牌时请确保勾选以下权限:'));
     if (storageType === 'github') {
       console.log('  • gist (创建和管理 Gist)');
